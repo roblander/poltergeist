@@ -27,6 +27,10 @@ module Capybara::Poltergeist
       self.debug = @debug if @debug
     end
 
+    def set_attribute(page_id, id, name, value)
+      command 'set_attribute', page_id, id, name, value
+    end
+
     def visit(url)
       command 'visit', url
     end
@@ -340,6 +344,7 @@ module Capybara::Poltergeist
     private
 
     def log(message)
+      # puts "#{  Thread.current }: #{message}"
       logger.puts message if logger
     end
 
