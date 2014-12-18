@@ -205,6 +205,10 @@ class Poltergeist.Browser
     @page = prev_page if prev_page
     this.sendResponse(true)
 
+  set_attribute: (page_id, id, name, value) ->
+    node = this.node(page_id, id)
+    node.setAttribute(name, value)
+
   mouse_event: (page_id, id, name) ->
     # Get the node before changing state, in case there is an exception
     node = this.node(page_id, id)

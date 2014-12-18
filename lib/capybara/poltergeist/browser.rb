@@ -25,6 +25,10 @@ module Capybara::Poltergeist
       self.debug = @debug if @debug
     end
 
+    def set_attribute(page_id, id, name, value)
+      command 'set_attribute', page_id, id, name, value
+    end
+
     def visit(url)
       command 'visit', url
     end
@@ -268,7 +272,7 @@ module Capybara::Poltergeist
       log message.inspect
 
       json = JSON.load(server.send(JSON.dump(message)))
-      log json.inspect
+      log json.inspect[0..20]
 
       if json['error']
         klass = ERROR_MAPPINGS[json['error']['name']] || BrowserError
@@ -292,6 +296,7 @@ module Capybara::Poltergeist
     private
 
     def log(message)
+      # puts "#{  Thread.current }: #{message}"
       logger.puts message if logger
     end
 

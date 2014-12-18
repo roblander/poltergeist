@@ -26,6 +26,10 @@ module Capybara::Poltergeist
       end
     end
 
+    def []=(name, value)
+      command(:set_attribute, name, value)
+    end
+
     def find(method, selector)
       command(:find_within, method, selector).map { |id| self.class.new(driver, page_id, id) }
     end
